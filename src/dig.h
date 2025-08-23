@@ -11,6 +11,7 @@ typedef struct
   void *_entries;
   size_t _size;
   size_t _type_size;
+  uint8_t _unserialisable;
 } dig_t;
 
 typedef enum

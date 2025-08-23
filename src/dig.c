@@ -50,7 +50,11 @@ dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at
         *((char **)((char *)dig->_entries + i * dig->_type_size)) = NULL;
       }
       printf("[dig info] Pragma set size to %zu entries\n", dig->_size);
-    } else 
+    } else if(0 == strcmp((*curr_token).str, "unserialisable"))
+    {
+      dig->_unserialisable = 1;
+      printf("[dig info] Pragma made dig unserialisable\n");
+    } else
     {
       printf("[dig error] Unrecognized pragma command \"#%s\"\n", (*curr_token).str);
     }
@@ -136,6 +140,12 @@ void dig_destroy(dig_t *dig)
 
 void dig_write(const char *path, dig_t *dig, void(*get_at)(void *, size_t, dig_value_t*), char *field_names[], size_t num_fields)
 {
+  if(1 == dig->_unserialisable)
+  {
+    printf("[dig warning] Aborting, dig was made unserialisable\n");
+    return;
+  }
+
   FILE *fptr = fopen(path, "w");
   if(NULL == fptr)
   {
