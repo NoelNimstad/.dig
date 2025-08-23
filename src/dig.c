@@ -111,7 +111,7 @@ void *dig_retrieve(dig_t *dig, char *entry)
 {
   size_t i = dig_hash(entry) % dig->_size;
   
-  while(NULL != *((char **) ((char *)dig->_entries + i * dig->_type_size)) && 0 != strcmp(*((char **) ((char *)dig->_entries + i * dig->_type_size)), entry)) 
+  while(NULL != *((char **)((char *)dig->_entries + i * dig->_type_size)) && 0 != strcmp(*((char **)((char *)dig->_entries + i * dig->_type_size)), entry)) 
   {
     i = (i + 1) % dig->_size;
   }

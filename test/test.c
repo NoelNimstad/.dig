@@ -29,13 +29,11 @@ void dig_set_at(void *entry, size_t field, void *value)
       dig_entry->key = (char *)value;
       break;
     case DIG_FIELD_TEXT:
+    case DIG_FIELD_REFERENCE:
       dig_entry->text = (char *)value;
       break;
     case DIG_FIELD_ID:
       dig_entry->id = *((int *)value);
-      break;
-    case DIG_FIELD_REFERENCE:
-      dig_entry->text = (char *)value;
       break;
   }
 }
