@@ -23,6 +23,7 @@ dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at
   dig_t *dig = (dig_t *)malloc(1 * sizeof(dig_t));
   dig->_type_size = type_size;
   token_t *tokens = _dig_tokenise(data);
+  free(data);
 
   size_t token_count = 0;
   token_t *curr_token = tokens;
@@ -102,7 +103,6 @@ dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at
   }
 
   _dig_destroy_tokens(tokens);
-  free(data);
   printf("[dig info] Successfully loaded %s\n", path);
   return dig;
 }
