@@ -1,6 +1,6 @@
 #include "dig.h"
 
-dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at)(void *, size_t, char *), size_t type_size)
+dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at)(void *, size_t, void *), size_t type_size)
 {
   FILE *fptr = fopen(path, "r");
   if(NULL == fptr)
@@ -82,15 +82,22 @@ dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at
       }
       curr_token++;
       
-      if(_DIG_TOKEN_STRING != (*curr_token).type)
+      token_e type = (*curr_token).type;
+      if(_DIG_TOKEN_STRING == type || _DIG_TOKEN_ENTRY == type)
       {
-        printf("[dig error] String value did not follow field name and colon\n");
+        set_at((char *)dig->_entries + i * dig->_type_size, j, strdup((*curr_token).str));
+        printf("[dig info] Set %s:%s to %s\n", entry, (*(curr_token - 2)).str, (*curr_token).str);
+        curr_token++;
+      } else if(_DIG_TOKEN_NUMBER == type)
+      {
+        set_at((char *)dig->_entries + i * dig->_type_size, j, &(*curr_token).num);
+        printf("[dig info] Set %s:%s to %d\n", entry, (*(curr_token - 2)).str, (*curr_token).num);
+        curr_token++;
+      } else
+      {
+        printf("[dig error] (String | Number | Entry) value did not follow field name and colon\n");
         continue;
       }
-
-      set_at((char *)dig->_entries + i * dig->_type_size, j, strdup((*curr_token).str));
-      printf("[dig info] Set %s:%s to %s\n", entry, (*(curr_token - 2)).str, (*curr_token).str);
-      curr_token++;
     }
   }
 

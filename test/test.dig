@@ -1,19 +1,9 @@
-#size 11 // choose prime numbers larger than, but close to the amount of entries
+#size 2
 
-DIALOGUE_INTRO_1
-$character: "john"
-$value: "yo yo! we are so back"
-$next: "DIALOGUE_INTRO_2"
+DIG_TESTING
+$text: "lorem ipsum"
+$reference: DIG_ERROR
+$id: 2
 
-DIALOGUE_INTRO_2      
-$character: "jan"
-$value: "ikr"
-$next: "DIALOGUE_INTRO_3"
-
-DIALOGUE_INTRO_3     
-$character: "john"
-$value: "just have to pray dig works with 3 entries as well!"
-
-DIALOGUE_INTRO_ERROR
-$character: "MISSING"
-$value: "MISSING"
+DIG_ERROR
+$text: "ERROR"

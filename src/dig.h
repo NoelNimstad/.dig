@@ -13,7 +13,7 @@ typedef struct
   size_t _type_size;
 } dig_t;
 
-dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at)(void *, size_t, char *), size_t type_size);
+dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at)(void *, size_t, void *), size_t type_size);
 void *dig_retrieve(dig_t *dig, char *entry);
 void dig_destroy(dig_t *dig);
 
