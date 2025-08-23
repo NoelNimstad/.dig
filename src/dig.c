@@ -133,3 +133,48 @@ void dig_destroy(dig_t *dig)
   free(dig->_entries);
   free(dig);
 }
+
+void dig_write(const char *path, dig_t *dig, void(*get_at)(void *, size_t, dig_value_t*), char *field_names[], size_t num_fields)
+{
+  FILE *fptr = fopen(path, "w");
+  if(NULL == fptr)
+  {
+    printf("[dig error] Failiure opening %s for writing.", path);
+  }
+
+  fprintf(fptr, "#size %zu\n\n", dig->_size);
+  for(size_t i = 0; dig->_size > i; i++)
+  {
+    char *key = *((char **)((char *)dig->_entries + i * dig->_type_size));
+    if(NULL != key)
+    {
+      fprintf(fptr, "%s\n", key);
+      for(size_t j = 1; num_fields >= j; j++)
+      {
+        dig_value_t value;
+        void *entry_ptr = (char *)dig->_entries + i * dig->_type_size;
+        get_at(entry_ptr, j, &value);
+        
+        char* field_name = field_names[j - 1]; 
+        
+        switch(value.type)
+        {
+          case DIG_STRING:
+            if(NULL != value.value.str) fprintf(fptr, "\t$%s: \"%s\"\n", field_name, value.value.str);
+            break;
+          case DIG_REFERENCE:
+            if(NULL != value.value.str) fprintf(fptr, "\t$%s: %s\n", field_name, value.value.str);
+            break;
+          case DIG_NUMBER:
+            if(0 != value.value.num) fprintf(fptr, "\t$%s: %d\n", field_name, value.value.num);
+            break;
+          case DIG_UNKNOWN:
+            break;
+        }
+      }
+      fprintf(fptr, "\n");
+    }
+  }
+
+  fclose(fptr);
+}
