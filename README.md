@@ -10,10 +10,12 @@
 HAYES
 	$photo: "res/hayes.png"
 	$name: "Hayes M."
+	$age: 34
 
 ARTHUR
 	$photo: "res/arthur.png"
 	$name: "Arthur F."
+	$age: 33
 ```
 ```js
 // dialogue.dig
