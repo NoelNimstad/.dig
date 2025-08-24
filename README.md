@@ -1,4 +1,4 @@
-## `.dig` – A new data format made for use with C
+## `.dig` – A new markup language made for use with C
 ### Examples
 #### Dialogue & Characters
 ```js
