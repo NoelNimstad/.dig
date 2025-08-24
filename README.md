@@ -48,30 +48,30 @@ STREETS_HAYES_4
 
 typedef struct
 {
-  char *key;
-  char *photo;
-  char *name;
-  int age;
+	char *key;
+	char *photo;
+	char *name;
+	int age;
 } character_t;
 
-#define FIELD_PHOTO 1
-#define FIELD_NAME  2
-#define FIELD_AGE   3
+#define FIELD_PHOTO	1
+#define FIELD_NAME	2
+#define FIELD_AGE		3
 size_t character_interface(char *field)
 {
-  size_t res = 0;
-  // all fields have unique initial letters
-  if(field[0] == 'p') res = FIELD_PHOTO;
-  if(field[0] == 'n') res = FIELD_NAME;
-  if(field[0] == 'a') res = FIELD_AGE;
-  return res;
+	size_t res = 0;
+	// all fields have unique initial letters
+	if(field[0] == 'p') res = FIELD_PHOTO;
+	if(field[0] == 'n') res = FIELD_NAME;
+	if(field[0] == 'a') res = FIELD_AGE;
+	return res;
 }
 
 void dig_set_character(void *entry, size_t field, void *value)
 {
-  character_t *character = (character_t *)entry;
-  switch(field)
-  {
+	character_t *character = (character_t *)entry;
+	switch(field)
+	{
 		case 0:
 			character->key = (char *)value;
 			break;
@@ -84,15 +84,15 @@ void dig_set_character(void *entry, size_t field, void *value)
 		case FIELD_AGE:
 			character->age = *(int *)value;
 			break;
-  }
+	}
 }
 
 typedef struct
 {
-  char *key;
-  char *text;
-  char *character;
-  char *next;
+	char *key;
+	char *text;
+	char *character;
+	char *next;
 } dialogue_t;
 
 #define FIELD_TEXT      1
@@ -100,11 +100,11 @@ typedef struct
 #define FIELD_NEXT      3
 size_t dialogue_interface(char *field)
 {
-  size_t res = 0;
-  if(field[0] == 't') res = FIELD_TEXT;
-  if(field[0] == 'c') res = FIELD_CHARACTER;
-  if(field[0] == 'n') res = FIELD_NEXT;
-  return res;
+	size_t res = 0;
+	if(field[0] == 't') res = FIELD_TEXT;
+	if(field[0] == 'c') res = FIELD_CHARACTER;
+	if(field[0] == 'n') res = FIELD_NEXT;
+	return res;
 }
 
 void dig_set_dialogue(void *entry, size_t field, void *value)
