@@ -40,28 +40,28 @@ void dig_set_at(void *entry, size_t field, void *value)
   }
 }
 
-void dig_get_at(void *entry, size_t field, dig_value_t *value)
-{
-  dig_entry_t *dig_entry = (dig_entry_t *)entry;
-  switch(field)
-  {
-    case DIG_FIELD_TEXT:
-      value->type = DIG_STRING;
-      value->value.str = dig_entry->text;
-      break;
-    case DIG_FIELD_REFERENCE:
-      value->type = DIG_REFERENCE;
-      value->value.str = dig_entry->reference;
-      break;
-    case DIG_FIELD_ID:
-      value->type = DIG_NUMBER;
-      value->value.num = dig_entry->id;
-      break;
-    default:
-      value->type = DIG_UNKNOWN;
-      break;
-  }
-}
+// void dig_get_at(void *entry, size_t field, dig_value_t *value)
+// {
+//   dig_entry_t *dig_entry = (dig_entry_t *)entry;
+//   switch(field)
+//   {
+//     case DIG_FIELD_TEXT:
+//       value->type = DIG_STRING;
+//       value->value.str = dig_entry->text;
+//       break;
+//     case DIG_FIELD_REFERENCE:
+//       value->type = DIG_REFERENCE;
+//       value->value.str = dig_entry->reference;
+//       break;
+//     case DIG_FIELD_ID:
+//       value->type = DIG_NUMBER;
+//       value->value.num = dig_entry->id;
+//       break;
+//     default:
+//       value->type = DIG_UNKNOWN;
+//       break;
+//   }
+// }
 
 int main(int argc, char const *argv[])
 {
@@ -78,8 +78,8 @@ int main(int argc, char const *argv[])
   printf("test string: %s\ntest ID: %d\n", test->text, test->id);
   test->id += 1;
 
-  char *field_names[3] = {"text", "reference", "id"};
-  dig_write("test/test.dig", dig, dig_get_at, field_names, 3);
+  // char *field_names[3] = {"text", "reference", "id"};
+  // dig_write("test/test.dig", dig, dig_get_at, field_names, 3);
   dig_destroy(dig);
   return 0;
 }

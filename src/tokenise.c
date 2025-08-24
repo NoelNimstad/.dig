@@ -4,7 +4,7 @@ static inline char *_dig_read_until_space(char **curr_char)
 {
   char buffer[0xff];
   size_t i = 0;
-  while(!isspace(*(++*curr_char)))
+  while('\0' != *(++*curr_char) && !isspace(**curr_char))
   {
     buffer[i++] = **curr_char;
   }
@@ -28,10 +28,15 @@ static inline char *_dig_read_until(char **curr_char, char delim)
 token_t *_dig_tokenise(char *data)
 {
   token_t *tokens = (token_t *)malloc(_DIG_TOKEN_BUFFER_SIZE * sizeof(token_t));
+  if(NULL == tokens)
+  {
+    printf("[dig err] Failed to allocate memory for tokens!\n");
+    return NULL;
+  }
   size_t curr_token = 0;
 
   char *curr_char = data;
-  do
+  while('\0' != *(curr_char++))
   {
     if(isspace(*curr_char)) continue;
     
@@ -112,7 +117,7 @@ token_t *_dig_tokenise(char *data)
         break;
       }
     }
-  } while('\0' != *(curr_char++));
+  }
 
   tokens[curr_token++].type = _DIG_TOKEN_TERMINATE;
   return tokens;

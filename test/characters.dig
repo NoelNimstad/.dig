@@ -1,0 +1,13 @@
+// characters form Boneworks
+#size 2
+#unserialisable
+
+HAYES
+	$photo: "res/hayes.png"
+	$name: "Hayes M."
+	$age: 34
+
+ARTHUR
+	$photo: "res/arthur.png"
+	$name: "Arthur F."
+	$age: 33

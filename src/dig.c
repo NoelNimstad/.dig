@@ -21,6 +21,12 @@ dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at
   data[fsize] = '\0';
   
   dig_t *dig = (dig_t *)malloc(1 * sizeof(dig_t));
+  if(NULL == dig)
+  {
+    printf("[dig err] Failed to allocate memory for dig.\n");
+    free(data);
+    return NULL;
+  }
   dig->_type_size = type_size;
   token_t *tokens = _dig_tokenise(data);
   free(data);
@@ -113,6 +119,11 @@ dig_t *dig_initialise(const char *path, size_t(*interface)(char *), void(*set_at
 
 void *dig_retrieve(dig_t *dig, char *entry)
 {
+  if(NULL == entry) // fail safe
+  {
+    return NULL;
+  }
+
   size_t i = dig_hash(entry) % dig->_size;
   
   while(NULL != *((char **)((char *)dig->_entries + i * dig->_type_size)) && 0 != strcmp(*((char **)((char *)dig->_entries + i * dig->_type_size)), entry)) 

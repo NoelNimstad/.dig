@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define _DIG_TOKEN_BUFFER_SIZE 1024
+#define _DIG_TOKEN_BUFFER_SIZE 512
 
 typedef enum
 {
