@@ -32,7 +32,7 @@ STREETS_HAYES_2
 	$next: STREETS_HAYES_3
 
 STREETS_HAYES_3
-	$text:  "The board's calling an emergency meeting for all Monogon employs."
+	$text:  "The board's calling an emergency meeting for all Monogon employees."
 	$character: HAYES
 	$next: STREETS_HAYES_4
 
