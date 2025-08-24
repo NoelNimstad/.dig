@@ -4,6 +4,9 @@
 ```js
 // characters.dig
 // characters form Boneworks
+#size 2
+#unserialisable
+
 HAYES
 	$photo: "res/hayes.png"
 	$name: "Hayes M."
@@ -16,6 +19,7 @@ ARTHUR
 // dialogue.dig
 // dialogue from Boneworks
 #size 4
+#unserialisable
 
 STREETS_HAYES_1
 	$text: "Yo, Arthur! Over here!"
