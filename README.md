@@ -29,7 +29,7 @@ STREETS_HAYES_1
 STREETS_HAYES_2
 	$text: "How are you still in the city?"
 	$character: HAYES
-	$next: 
+	$next: STREETS_HAYES_3
 
 STREETS_HAYES_3
 	$text:  "The board's calling an emergency meeting for all Monogon employs."
