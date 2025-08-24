@@ -72,15 +72,15 @@ void dig_set_character(void *entry, size_t field, void *value)
   character_t *character = (character_t *)entry;
   switch(field)
   {
-    case 0:
-      character->key = (char *)value;
-      break;
+		case 0:
+			character->key = (char *)value;
+			break;
 		case FIELD_PHOTO:
-      character->photo = (char *)value;
-      break;
+			character->photo = (char *)value;
+			break;
 		case FIELD_NAME:
-      character->name = (char *)value;
-      break;
+			character->name = (char *)value;
+			break;
 		case FIELD_AGE:
 			character->age = *(int *)value;
 			break;
@@ -109,22 +109,22 @@ size_t dialogue_interface(char *field)
 
 void dig_set_dialogue(void *entry, size_t field, void *value)
 {
-  dialogue_t *dialogue = (dialogue_t *)entry;
-  switch(field)
-  {
-    case 0:
-      dialogue->key = (char *)value;
-      break;
+	dialogue_t *dialogue = (dialogue_t *)entry;
+	switch(field)
+	{
+		case 0:
+			dialogue->key = (char *)value;
+			break;
 		case FIELD_TEXT:
-      dialogue->text = (char *)value;
-      break;
+			dialogue->text = (char *)value;
+			break;
 		case FIELD_CHARACTER:
-      dialogue->character = (char *)value;
-      break;
+			dialogue->character = (char *)value;
+			break;
 		case FIELD_NEXT:
 			dialogue->next = (char *)value;
 			break;
-  }
+	}
 }
 
 int main(void)
